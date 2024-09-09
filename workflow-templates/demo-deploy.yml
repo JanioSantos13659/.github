@@ -1,0 +1,42 @@
+
+# nome da pipeline que será apresentado no githubactions
+name: Deploy Demoo
+
+on:
+  push:
+    branches: [ "main" ]
+
+  pull_request:
+    branches: [ "main"]
+
+  workflow_dispatch:
+
+
+jobs:
+
+  build:
+    
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run a one-line script
+        run: echo Hello, world! ${{secrets.SECRET_DEV}}
+
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
+
+  deploy-dev:
+    needs: build
+    uses: JanioSantos13659/pipeline_templates/.github/workflows/demo-deploy.yml@main
+    with: 
+     variavel-demo: "Demonstração Deploy dev"
+
+ deploy-hmg:
+    needs: deploy-dev
+    uses: JanioSantos13659/pipeline_templates/.github/workflows/demo-deploy.yml@main
+    with: 
+     variavel-demo: "Demonstração Deploy hmg"
