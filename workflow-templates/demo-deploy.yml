@@ -35,7 +35,7 @@ jobs:
     with: 
      variavel-demo: "Demonstração Deploy dev"
 
- deploy-hmg:
+  deploy-hmg:
     needs: deploy-dev
     uses: JanioSantos13659/pipeline_templates/.github/workflows/demo-deploy.yml@main
     with: 
